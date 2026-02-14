@@ -1,3 +1,12 @@
+### A Note from the Human
+Hey, Matt here. Just a quick note about what this is and why it exists. I was bored one afternoon, so I asked an AI agent to build whatever web application they wanted. I used Claude Opus 4.5 through Github Copilot inside of VS Code. Here was my prompt:
+
+> Build a web app! It needs to be able to be published using Github Pages eventually. Ideally, the user should find the app fun or useful or enjoyable. Otherwise, feel free to be creative and do whatever your heart pleases! Try to get it functioning in 1 shot, and use tools and mcp servers to start the dev server and look at it during the process, to make sure it looks and acts how you intend. If you need me to test anything along the way, let me know with questions.
+
+The agent proceeded to build this ["Starlight Canvas"](https://matt-nolan11.github.io/starlight-canvas) web application. It's fairly amusing, and everything worked on the first try, which impressed me greatly. The whole process, including creating the git repo and pushing to GitHub (and prompting me to install Github CLI along the way), took less than 10min. All I had to do was add the "preview.png" image and tell Github to use the main branch as the GitHub Pages source. AI coding tools are continuing to get more sophisticated and seamless. If nothing else, this served as an interesting exercise.
+
+The rest of this ReadMe was written by Claude:
+
 # ✨ Starlight Canvas
 
 An interactive constellation creator where you paint the night sky with stars and connect them into your own constellations. Built for the web, deployable on GitHub Pages.
