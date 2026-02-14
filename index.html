@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlight Canvas - Create Your Constellation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="background-stars"></div>
+    
+    <canvas id="constellation-canvas"></canvas>
+    
+    <div id="ui-overlay">
+        <header>
+            <h1>✨ Starlight Canvas</h1>
+            <p class="subtitle">Click to place stars • Drag between stars to connect • Create your own constellations</p>
+        </header>
+        
+        <div id="toolbar">
+            <div class="tool-group">
+                <label>Star Size</label>
+                <input type="range" id="star-size" min="2" max="15" value="5">
+            </div>
+            
+            <div class="tool-group">
+                <label>Star Color</label>
+                <div id="color-palette">
+                    <button class="color-btn active" data-color="#FFFFFF" style="background: #FFFFFF"></button>
+                    <button class="color-btn" data-color="#FFE4B5" style="background: #FFE4B5"></button>
+                    <button class="color-btn" data-color="#87CEEB" style="background: #87CEEB"></button>
+                    <button class="color-btn" data-color="#FFB6C1" style="background: #FFB6C1"></button>
+                    <button class="color-btn" data-color="#98FB98" style="background: #98FB98"></button>
+                    <button class="color-btn" data-color="#DDA0DD" style="background: #DDA0DD"></button>
+                </div>
+            </div>
+            
+            <div class="tool-group">
+                <label>Line Style</label>
+                <select id="line-style">
+                    <option value="solid">Solid</option>
+                    <option value="dashed">Dashed</option>
+                    <option value="dotted">Dotted</option>
+                </select>
+            </div>
+            
+            <div class="tool-group buttons">
+                <button id="clear-btn" class="action-btn">🗑️ Clear All</button>
+                <button id="save-btn" class="action-btn">💾 Save Image</button>
+                <button id="random-btn" class="action-btn">🎲 Random Stars</button>
+            </div>
+        </div>
+        
+        <div id="stats">
+            <span>⭐ Stars: <span id="star-count">0</span></span>
+            <span>🔗 Lines: <span id="line-count">0</span></span>
+        </div>
+        
+        <div id="instructions">
+            <p>💡 <strong>Tip:</strong> Right-click a star to delete it</p>
+        </div>
+    </div>
+    
+    <div id="shooting-stars"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

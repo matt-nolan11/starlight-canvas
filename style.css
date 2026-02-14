@@ -1,0 +1,318 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Mono', monospace;
+    background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a2a 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Background animated stars */
+#background-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Main canvas */
+#constellation-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: crosshair;
+}
+
+/* UI Overlay */
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#ui-overlay > * {
+    pointer-events: auto;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(10, 10, 30, 0.9) 0%, transparent 100%);
+}
+
+header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #fff, #87CEEB, #DDA0DD, #fff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 5s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(135, 206, 235, 0.5);
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+/* Toolbar */
+#toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 20px;
+    background: rgba(20, 20, 40, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(135, 206, 235, 0.3);
+}
+
+.tool-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.tool-group label {
+    font-size: 0.75rem;
+    color: #87CEEB;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tool-group.buttons {
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Range slider */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 120px;
+    height: 6px;
+    background: linear-gradient(90deg, #333, #555);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #87CEEB, #5f9ea0);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(135, 206, 235, 0.5);
+    transition: transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Color palette */
+#color-palette {
+    display: flex;
+    gap: 8px;
+}
+
+.color-btn {
+    width: 28px;
+    height: 28px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.color-btn:hover {
+    transform: scale(1.15);
+}
+
+.color-btn.active {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+/* Select dropdown */
+select {
+    background: rgba(30, 30, 60, 0.9);
+    color: #fff;
+    border: 1px solid rgba(135, 206, 235, 0.5);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+select:hover {
+    border-color: #87CEEB;
+}
+
+/* Action buttons */
+.action-btn {
+    background: linear-gradient(135deg, rgba(30, 30, 60, 0.9), rgba(50, 50, 80, 0.9));
+    color: #fff;
+    border: 1px solid rgba(135, 206, 235, 0.5);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: linear-gradient(135deg, rgba(50, 50, 80, 0.9), rgba(70, 70, 100, 0.9));
+    border-color: #87CEEB;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.3);
+}
+
+/* Stats */
+#stats {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 20px;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(135, 206, 235, 0.3);
+    font-size: 0.9rem;
+}
+
+#stats span {
+    color: #87CEEB;
+}
+
+/* Instructions */
+#instructions {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(20, 20, 40, 0.8);
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(135, 206, 235, 0.3);
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+#instructions strong {
+    color: #FFE4B5;
+}
+
+/* Shooting stars */
+#shooting-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff);
+    animation: shoot 1s ease-out forwards;
+    transform-origin: right center;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translateX(0) translateY(0) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-500px) translateY(500px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 0.75rem;
+    }
+    
+    #toolbar {
+        gap: 12px;
+        padding: 10px;
+    }
+    
+    .action-btn {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+    
+    #stats, #instructions {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+    }
+}
+
+/* Star glow effect on canvas */
+.star-glow {
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+/* Connection line preview */
+.line-preview {
+    stroke-dasharray: 5, 5;
+    animation: dash 0.5s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -10;
+    }
+}
